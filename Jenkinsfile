@@ -1,14 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            args '-p 8080:8080' 
+  agent any
+  stages {
+    stage('Build') {
+      parallel {
+        stage('Build') {
+          steps {
+            sh 'npm build'
+          }
         }
+      }
     }
-    stages {
-        stage('Build') { 
-            steps {
-                sh 'npm build' 
-            }
-        }
-    }
-}

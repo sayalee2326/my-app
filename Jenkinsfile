@@ -11,7 +11,7 @@ pipeline {
              steps {
                  withAWS(region:'us-east-1',credentials:'1234') {
                  sh 'echo "Uploading content with AWS creds"'
-                    s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'path/to/target/my-app', bucket:'mystaticdemosite')
+                    s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'/home/excellarate/my-app/my-app', bucket:'mystaticdemosite')
 
                  }   
              }

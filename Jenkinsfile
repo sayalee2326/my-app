@@ -3,16 +3,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                        sh 'npm install'
-                        sh 'npm run build'
+                sh 'npm install'
+                sh 'npm run build'
             }
-        }
-        stage('Push to S3') {
-            steps {
-                        sh 'aws configure set region $AWS_DEFAULT_REGION'
-                        sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
-                        sh 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID'
-            }
+        }      
+        stage('Upload to AWS') {
+             steps {
+                 withAWS(region:'us-east-1',credentials:'1234') {
+                 sh 'echo "Uploading content with AWS creds"'
+                     s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'my-app', bucket:'mystaticdemosite')
+                 }
+             }
         }
     }
 }

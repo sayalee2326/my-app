@@ -11,8 +11,8 @@ pipeline {
              steps {
                  withAWS(region:'us-east-1',credentials:'1234') {
                  sh 'echo "Uploading content with AWS creds"'
-                     s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'my-app', bucket:'mystaticdemosite')
-                 }
+                 s3Upload acl: 'Private', bucket: 'mystaticdemosite', cacheControl: '', excludePathPattern: '', file: 'https://github.com/sayalee2326/my-app.git', includePathPattern: '', metadatas: [''], redirectLocation: '', sseAlgorithm: '', tags: '', text: '', workingDir: ''
+                 }   
              }
         }
     }
